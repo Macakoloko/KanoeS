@@ -1,13 +1,13 @@
 "use client"
 
-import type { ReactNode } from "react"
+import { ReactNode } from "react"
 import { motion } from "framer-motion"
 
 interface PageTransitionProps {
   children: ReactNode
 }
 
-export default function PageTransition({ children }: PageTransitionProps) {
+const PageTransition = ({ children }: PageTransitionProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -19,4 +19,6 @@ export default function PageTransition({ children }: PageTransitionProps) {
     </motion.div>
   )
 }
+
+export default PageTransition
 

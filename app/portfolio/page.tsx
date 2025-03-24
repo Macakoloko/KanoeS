@@ -4,7 +4,6 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import PageTransition from "../../components/ui/page-transition"
 import SectionHeading from "@/components/ui/section-heading"
 import ProjectCard from "@/components/ui/project-card"
 
@@ -81,7 +80,8 @@ export default function PortfolioPage() {
     activeCategory === "Todos" ? projects : projects.filter((project) => project.category === activeCategory)
 
   return (
-    <PageTransition>
+    
+      <div>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black">
@@ -257,7 +257,8 @@ export default function PortfolioPage() {
           </div>
         </div>
       </section>
-    </PageTransition>
+    </div>
+    
   )
 }
 

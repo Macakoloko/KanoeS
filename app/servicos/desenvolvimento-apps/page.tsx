@@ -1,8 +1,9 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Check, Smartphone, ShoppingBag, Building } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import PageTransition from "@/components/ui/page-transition"
 import SectionHeading from "@/components/ui/section-heading"
 
 const benefits = [
@@ -34,7 +35,8 @@ const technologies = [
 
 export default function DesenvolvimentoAppsPage() {
   return (
-    <PageTransition>
+    
+      <div>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black">
@@ -364,7 +366,8 @@ export default function DesenvolvimentoAppsPage() {
           </div>
         </div>
       </section>
-    </PageTransition>
+    </div>
+    
   )
 }
 

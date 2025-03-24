@@ -2,12 +2,10 @@
 
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-import PageTransition from "@/components/ui/page-transition"
 
 export default function PoliticaPrivacidadePage() {
   return (
-    <PageTransition>
-      
+    <div>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black">
@@ -43,5 +41,12 @@ export default function PoliticaPrivacidadePage() {
               A Kanoê Digital ("nós", "nosso" ou "nossa") está comprometida em proteger sua privacidade. Esta Política de Privacidade explica como coletamos, usamos, divulgamos e protegemos suas informações pessoais quando você visita nosso site kanoe.digital e utiliza nossos serviços.
             </p>
             <p>
-              Ao utilizar nosso site e serviços, você concorda com a coleta e uso de informações de acordo com esta política.\
+              Ao utilizar nosso site e serviços, você concorda com a coleta e uso de informações de acordo com esta política.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
 

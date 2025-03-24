@@ -67,7 +67,7 @@ export async function POST(req: Request) {
         message: "Dados enviados com sucesso"
       })
     } catch (fetchError) {
-      if (fetchError.name === 'AbortError') {
+      if (fetchError instanceof Error && fetchError.name === 'AbortError') {
         throw new Error("Tempo limite excedido ao enviar formulário")
       }
       throw fetchError

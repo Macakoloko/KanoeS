@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import PageTransition from "@/components/ui/page-transition"
 import SectionHeading from "@/components/ui/section-heading"
 
 export default function ContatoPage() {
@@ -60,8 +59,7 @@ export default function ContatoPage() {
     }, 1500)
   }
 
-  return (
-    <PageTransition>
+  return (<div>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black">
@@ -347,7 +345,8 @@ export default function ContatoPage() {
           </div>
         </div>
       </section>
-    </PageTransition>
+    
   )
-}
+    </div>
+  )}
 

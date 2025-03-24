@@ -1,8 +1,9 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Check, BarChart, TrendingUp, Users, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import PageTransition from "@/components/ui/page-transition"
 import SectionHeading from "@/components/ui/section-heading"
 
 const benefits = [
@@ -39,7 +40,8 @@ const strategies = [
 
 export default function MarketingDigitalPage() {
   return (
-    <PageTransition>
+    
+      <div>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black">
@@ -291,7 +293,8 @@ export default function MarketingDigitalPage() {
           </div>
         </div>
       </section>
-    </PageTransition>
+    </div>
+    
   )
 }
 

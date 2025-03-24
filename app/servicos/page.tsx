@@ -1,7 +1,9 @@
+"use client"
+
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, BarChart, Globe, Smartphone, Search, Instagram, Megaphone, PenTool, Lightbulb } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import PageTransition from "@/components/ui/page-transition"
 import SectionHeading from "@/components/ui/section-heading"
 import ServiceCard from "@/components/ui/service-card"
 
@@ -10,15 +12,15 @@ const services = [
     title: "Marketing Digital",
     description:
       "Estratégias personalizadas para aumentar sua visibilidade online e atrair mais clientes qualificados para o seu negócio.",
-    iconName: "Megaphone",
+    icon: Megaphone,
     color: "bg-gradient-to-br from-kanoe-green-dark to-kanoe-green-darker",
     link: "/servicos/marketing-digital",
   },
   {
     title: "Desenvolvimento Web",
     description:
-      "Criação de sites e aplicações web modernas, responsivas e otimizadas para conversão e experiência do usuário.",
-    iconName: "Globe",
+      "Criação de sites e aplicações web responsivos, performáticos e otimizados para SEO que refletem a identidade da sua marca.",
+    icon: Globe,
     color: "bg-gradient-to-br from-kanoe-brown to-black",
     link: "/servicos/desenvolvimento-web",
   },
@@ -26,7 +28,7 @@ const services = [
     title: "Desenvolvimento de Apps",
     description:
       "Desenvolvimento de aplicativos móveis nativos e híbridos para iOS e Android com foco em usabilidade e performance.",
-    iconName: "Smartphone",
+    icon: Smartphone,
     color: "bg-gradient-to-br from-kanoe-green-darker to-black",
     link: "/servicos/desenvolvimento-apps",
   },
@@ -34,7 +36,7 @@ const services = [
     title: "SEO",
     description:
       "Otimização para mecanismos de busca para melhorar seu ranking e atrair tráfego orgânico qualificado para seu site.",
-    iconName: "Search",
+    icon: Search,
     color: "bg-gradient-to-br from-kanoe-brown to-kanoe-green-darker",
     link: "/servicos/seo",
   },
@@ -42,16 +44,16 @@ const services = [
     title: "Redes Sociais",
     description:
       "Gestão profissional de redes sociais para engajar seu público, fortalecer sua marca e gerar resultados concretos.",
-    iconName: "Instagram",
+    icon: Instagram,
     color: "bg-gradient-to-br from-kanoe-green-dark to-kanoe-brown",
     link: "/servicos/redes-sociais",
   },
   {
     title: "Análise de Dados",
     description:
-      "Análise detalhada de métricas e comportamento do usuário para otimizar suas estratégias e maximizar resultados.",
-    iconName: "BarChart",
-    color: "bg-gradient-to-br from-kanoe-green-darker to-kanoe-green-dark",
+      "Análise de dados e métricas para tomada de decisões baseadas em dados e otimização de resultados do seu negócio.",
+    icon: BarChart,
+    color: "bg-gradient-to-br from-kanoe-brown to-black",
     link: "/servicos/analise-dados",
   },
 ]
@@ -85,7 +87,8 @@ const processSteps = [
 
 export default function ServicosPage() {
   return (
-    <PageTransition>
+    
+      <div>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black">
@@ -121,7 +124,7 @@ export default function ServicosPage() {
                 key={index}
                 title={service.title}
                 description={service.description}
-                iconName={service.iconName}
+                icon={service.icon}
                 color={service.color}
                 link={service.link}
               />
@@ -192,7 +195,8 @@ export default function ServicosPage() {
           </div>
         </div>
       </section>
-    </PageTransition>
+    </div>
+    
   )
 }
 

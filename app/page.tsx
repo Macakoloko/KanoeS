@@ -141,6 +141,8 @@ export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX,
@@ -156,6 +158,8 @@ export default function Home() {
   }, [])
 
   const calculateMovement = (axis: "x" | "y", strength = 20) => {
+    if (typeof window === 'undefined') return 0;
+    
     const windowSize = axis === "x" ? window.innerWidth : window.innerHeight
     const mousePos = axis === "x" ? mousePosition.x : mousePosition.y
     const percentage = mousePos / windowSize - 0.5

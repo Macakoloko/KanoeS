@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Popup } from "@/components/ui/popup"
-import PageTransition from "@/components/ui/page-transition"
 import SectionHeading from "@/components/ui/section-heading"
 
 const services = [
@@ -39,8 +38,7 @@ interface BeforeAfterProps {
 }
 
 const BeforeAfter: React.FC<BeforeAfterProps> = ({ beforeImage, afterImage, clientName, description }) => {
-  return (
-    <div className="bg-black/50 border border-kanoe-green-dark/20 rounded-xl p-6 hover:border-kanoe-beige/30 transition-colors">
+  return (<div className="bg-black/50 border border-kanoe-green-dark/20 rounded-xl p-6 hover:border-kanoe-beige/30 transition-colors">
       <h3 className="text-lg font-bold mb-4 text-kanoe-beige">{clientName}</h3>
       <p className="text-gray-400 mb-4">{description}</p>
       <div className="grid grid-cols-2 gap-4">
@@ -242,7 +240,7 @@ export default function FaleConoscoPage() {
   }
 
   return (
-    <PageTransition>
+    <div>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black">
@@ -270,7 +268,7 @@ export default function FaleConoscoPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-black/50 border border-kanoe-green-dark/20 rounded-xl p-8 md:p-12">
               {!isSuccess ? (
-                <>
+                <div>
                   <div className="flex justify-between mb-8">
                     {[1, 2, 3].map((step) => (
                       <div key={step} className="flex flex-col items-center">
@@ -616,7 +614,7 @@ export default function FaleConoscoPage() {
                       </motion.div>
                     )}
                   </form>
-                </>
+                </div>
               ) : (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -879,7 +877,7 @@ export default function FaleConoscoPage() {
           </div>
         </div>
       </section>
-    </PageTransition>
+    </div>
   )
 }
 

@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Check, Globe, Zap, Users, LineChart } from "lucide-react"
@@ -22,8 +24,7 @@ const results = [
 ]
 
 export default function EstrategiaRedesSociaisPage() {
-  return (
-    <PageTransition>
+  return (<div>
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black">
@@ -148,6 +149,7 @@ export default function EstrategiaRedesSociaisPage() {
           </div>
         </div>
       </section>
-    </PageTransition>
+    
   )
-}
+    </div>
+  )}

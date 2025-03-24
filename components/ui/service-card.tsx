@@ -1,32 +1,22 @@
 "use client"
 import { motion } from "framer-motion"
-import dynamic from "next/dynamic"
 import Link from "next/link"
-import { LucideIcon } from "lucide-react"
+import { HelpCircle, LucideIcon } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 interface ServiceCardProps {
   title: string
   description: string
-  iconName?: string
   icon?: LucideIcon
   color: string
   link: string
 }
 
-export default function ServiceCard({ title, description, iconName, icon: IconComponent, color, link }: ServiceCardProps) {
-  // Handle both direct icon component and dynamic loading via iconName
-  const Icon = IconComponent || (iconName ? dynamic(() => import('lucide-react').then((mod) => {
-    const IconModule = mod[iconName];
-    if (!IconModule) {
-      console.error(`Icon ${iconName} not found in lucide-react`);
-      return mod.HelpCircle; // Fallback icon
-    }
-    return IconModule;
-  }), {
-    ssr: false,
-  }) : null)
+export default function ServiceCard({ title, description, icon: IconComponent, color, link }: ServiceCardProps) {
+  // Use the provided icon or fallback to HelpCircle
+  const Icon = IconComponent || HelpCircle;
+  
   return (
     <motion.div whileHover={{ y: -10 }} transition={{ duration: 0.3 }}>
       <Card className="bg-black/50 border-gray-800 overflow-hidden group hover:border-kanoe-green-dark/50 transition-colors h-full">
