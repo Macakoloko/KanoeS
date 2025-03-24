@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -35,7 +35,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null)
   const pathname = usePathname()
+  const menuRef = useRef<HTMLDivElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
 
+  // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -49,15 +52,44 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Close mobile menu when route changes
   useEffect(() => {
-    // Close mobile menu when route changes
     setIsMenuOpen(false)
     setOpenSubmenu(null)
   }, [pathname])
 
+  // Handle click outside to close menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMenuOpen &&
+        menuRef.current && 
+        !menuRef.current.contains(event.target as Node) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    // Prevent scrolling when menu is open
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.body.style.overflow = ''
+    }
+  }, [isMenuOpen])
+
   const toggleSubmenu = (name: string, e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault() // Prevent navigation when clicking the dropdown toggle
+      e.stopPropagation() // Stop event from bubbling up
     }
 
     if (openSubmenu === name) {
@@ -156,9 +188,10 @@ export default function Navbar() {
         </div>
 
         <Button
+          ref={menuButtonRef}
           variant="ghost"
           size="icon"
-          className="lg:hidden relative z-10"
+          className="lg:hidden relative z-[60]"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -168,13 +201,14 @@ export default function Navbar() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="fixed inset-0 bg-black/95 backdrop-blur-md z-40 flex flex-col justify-center items-center gap-8 lg:hidden"
+              ref={menuRef}
+              className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex flex-col justify-center items-center gap-8 lg:hidden overflow-y-auto"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 0.3 }}
             >
-              <nav className="flex flex-col gap-6 items-center">
+              <nav className="flex flex-col gap-6 items-center w-full max-w-md px-6">
                 {navLinks.map((link) => (
                   <div key={link.name} className="w-full text-center">
                     {link.submenu ? (
@@ -183,7 +217,7 @@ export default function Navbar() {
                           className={`text-xl font-medium mb-2 flex items-center gap-2 ${
                             isActive(link.path) ? "text-kanoe-beige" : "text-white"
                           }`}
-                          onClick={() => toggleSubmenu(link.name)}
+                          onClick={(e) => toggleSubmenu(link.name, e)}
                         >
                           {link.name}
                           <ChevronDown
@@ -197,7 +231,7 @@ export default function Navbar() {
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.3 }}
-                              className="flex flex-col gap-3 mb-4"
+                              className="flex flex-col gap-3 mb-4 w-full"
                             >
                               {link.submenu.map((sublink) => (
                                 <Link
@@ -206,6 +240,7 @@ export default function Navbar() {
                                   className={`text-base ${
                                     pathname === sublink.path ? "text-kanoe-beige" : "text-white/80"
                                   }`}
+                                  onClick={() => setIsMenuOpen(false)}
                                 >
                                   {sublink.name}
                                 </Link>
@@ -218,6 +253,7 @@ export default function Navbar() {
                       <Link
                         href={link.path}
                         className={`text-xl font-medium ${isActive(link.path) ? "text-kanoe-beige" : "text-white"}`}
+                        onClick={() => setIsMenuOpen(false)}
                       >
                         {link.name}
                       </Link>
@@ -230,7 +266,7 @@ export default function Navbar() {
                 asChild
                 className="bg-kanoe-green-dark text-kanoe-beige hover:bg-kanoe-green-darker border border-kanoe-beige/20 px-8 py-6 text-lg"
               >
-                <Link href="/fale-conosco">Fale Conosco</Link>
+                <Link href="/fale-conosco" onClick={() => setIsMenuOpen(false)}>Fale Conosco</Link>
               </Button>
             </motion.div>
           )}
