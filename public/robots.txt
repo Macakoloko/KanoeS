@@ -1,0 +1,42 @@
+# https://www.kanoe.digital
+# Configuração do robots.txt para a Kanoê Digital
+
+User-agent: *
+Allow: /
+Allow: /portfolio/
+Allow: /servicos/
+Allow: /sobre/
+Allow: /fale-conosco/
+Allow: /blog/
+
+# Desabilitar acesso a arquivos e diretórios específicos
+Disallow: /api/
+Disallow: /.env
+Disallow: /.env.*
+Disallow: /.git
+Disallow: /.github
+Disallow: /node_modules/
+Disallow: /package.json
+Disallow: /package-lock.json
+
+# Permitir acesso a recursos estáticos
+Allow: /images/
+Allow: /fonts/
+Allow: /favicon.ico
+Allow: /manifest.json
+
+# Sitemap
+Sitemap: https://www.kanoe.digital/sitemap.xml
+
+# Configurações específicas para bots populares
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1 
